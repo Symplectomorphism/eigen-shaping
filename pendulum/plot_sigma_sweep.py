@@ -68,7 +68,7 @@ for ax, sigma in zip(axes, SIGMAS):
     # sigma^2 magnitude prefactor removed.
     scale = np.nanpercentile(np.abs(Us), PCTL)
     Un = np.clip(Us / scale, -1.0, 1.0)
-    im = ax.pcolormesh(THs, Vs, Un, cmap="RdBu_r",
+    im = ax.pcolormesh(THs, Vs, Un, cmap="RdBu_r", rasterized=True,
                        vmin=-1.0, vmax=1.0, shading="auto")
     # switching manifold u* = 0 (its location is sigma-robust; the transition
     # across it steepens as sigma -> 0)
@@ -82,6 +82,6 @@ for ax, sigma in zip(axes, SIGMAS):
 axes[0].set_ylabel(r"$\dot\theta$ (rad/s)")
 cb = fig.colorbar(im, ax=axes, shrink=0.9, pad=0.01)
 cb.set_label(r"$u^\star_\sigma\,/\,|u^\star_\sigma|_{\max}$")
-fig.savefig(FIG / "sigma_sweep.pdf")
+fig.savefig(FIG / "sigma_sweep.pdf", dpi=400)
 plt.close(fig)
 print(f"saved {FIG/'sigma_sweep.pdf'}")

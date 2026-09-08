@@ -41,7 +41,7 @@ def plot_all():
     # ~16 over the full grid but only ~6 over |v|<=8, so scaling to the full grid
     # spends most of the range on tails that are cropped and flattens the view.
     win = np.abs(vs) <= 8
-    im = ax.pcolormesh(TH, V, logpsi, cmap="viridis", shading="auto",
+    im = ax.pcolormesh(TH, V, logpsi, cmap="viridis", shading="auto", rasterized=True,
                        vmin=logpsi[:, win].min(), vmax=logpsi[:, win].max())
     fig.colorbar(im, ax=ax)
     ax.set_title(r"$\log \psi^\star$ ($\sigma=2.0$)")
@@ -50,12 +50,12 @@ def plot_all():
     ax.set_xlim([thetas.min(), thetas.max()])
     ax.set_ylim([-8, 8])
     fig.tight_layout()
-    fig.savefig(FIGDIR / "eigfun_logpsi.pdf")
+    fig.savefig(FIGDIR / "eigfun_logpsi.pdf", dpi=400)
     plt.close(fig)
     
     # 2. Plot control field
     fig, ax = plt.subplots(figsize=(5, 4))
-    im = ax.pcolormesh(TH, V, uf, cmap="RdBu_r", vmin=-15, vmax=15, shading="auto")
+    im = ax.pcolormesh(TH, V, uf, cmap="RdBu_r", vmin=-15, vmax=15, shading="auto", rasterized=True)
     fig.colorbar(im, ax=ax)
     ax.set_title(r"Control field $u^\star$ ($\sigma=2.0$)")
     ax.set_xlabel(r"$\theta$ (rad)")
@@ -63,7 +63,7 @@ def plot_all():
     ax.set_xlim([thetas.min(), thetas.max()])
     ax.set_ylim([-8, 8])
     fig.tight_layout()
-    fig.savefig(FIGDIR / "eigfun_control.pdf")
+    fig.savefig(FIGDIR / "eigfun_control.pdf", dpi=400)
     plt.close(fig)
 
     # 3. Deploy and plot trajectories WITH saturation
