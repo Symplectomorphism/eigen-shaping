@@ -20,7 +20,7 @@ from pendulum.dynamics import U_MAX, G_GRAV, L as L_LEN, B_DAMP, M
 import jax.numpy as jnp
 from pathlib import Path
 
-FIGDIR = Path(__file__).resolve().parents[2] / "notes" / "figures"
+FIGDIR = Path(__file__).resolve().parents[1] / "figures"
 FIGDIR.mkdir(parents=True, exist_ok=True)
 
 def plot_all():
@@ -37,7 +37,12 @@ def plot_all():
     TH, V = np.meshgrid(thetas, vs, indexing="ij")
     
     fig, ax = plt.subplots(figsize=(5, 4))
-    im = ax.pcolormesh(TH, V, logpsi, cmap="viridis", shading="auto")
+    # Scale the colour map to the velocity window actually shown: log psi spans
+    # ~16 over the full grid but only ~6 over |v|<=8, so scaling to the full grid
+    # spends most of the range on tails that are cropped and flattens the view.
+    win = np.abs(vs) <= 8
+    im = ax.pcolormesh(TH, V, logpsi, cmap="viridis", shading="auto",
+                       vmin=logpsi[:, win].min(), vmax=logpsi[:, win].max())
     fig.colorbar(im, ax=ax)
     ax.set_title(r"$\log \psi^\star$ ($\sigma=2.0$)")
     ax.set_xlabel(r"$\theta$ (rad)")

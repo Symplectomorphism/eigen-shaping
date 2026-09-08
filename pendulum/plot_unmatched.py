@@ -23,7 +23,7 @@ plt.rcParams.update({
     "legend.fontsize": 11,
 })
 
-FIG = Path(__file__).resolve().parents[2] / "notes" / "figures"
+FIG = Path(__file__).resolve().parents[1] / "figures"
 FIG.mkdir(parents=True, exist_ok=True)
 
 rhos = np.array([0.0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.6, 0.8])

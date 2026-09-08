@@ -39,7 +39,7 @@ try:
 except ModuleNotFoundError:
     from pendulum.eigfun import build_generator, principal_eigfunction, control_field
 
-FIG = Path(__file__).resolve().parents[2] / "notes" / "figures"
+FIG = Path(__file__).resolve().parents[1] / "figures"
 FIG.mkdir(parents=True, exist_ok=True)
 
 NTH, NV, VMAX = 161, 201, 16.0

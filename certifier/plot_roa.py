@@ -27,7 +27,7 @@ import pendulum_cert as PC
 import cartpole_cert as CC
 import cartpole_dyn as CD
 
-FIG = Path(__file__).resolve().parents[2] / "notes" / "figures"
+FIG = Path(__file__).resolve().parents[1] / "figures"
 FIG.mkdir(parents=True, exist_ok=True)
 
 # certified results (from the bisection runs)
@@ -124,7 +124,7 @@ fig.savefig(FIG / "certified_roa.pdf")
 plt.close(fig)
 print(f"saved {FIG/'certified_roa.pdf'}")
 
-# write gamma* values for the paper
+# the manuscript \input{}s these levels; written beside the figures here
 for name, val in [("roa_gamma_pendulum", GAMMA_P), ("roa_gamma_cartpole", GAMMA_C)]:
-    (Path(__file__).parents[2] / "papers" / "eigenfunction" / f"{name}.tex").write_text(f"{val:.2f}")
+    (FIG / f"{name}.tex").write_text(f"{val:.2f}")
 print("wrote roa_gamma_*.tex")

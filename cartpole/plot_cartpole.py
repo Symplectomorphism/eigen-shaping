@@ -23,7 +23,7 @@ from dynamics import (ph_drift, G_VEC, GEAR, mass_matrix,
                       M_P, M_C, L, G_GRAV, lqr_gains)
 from eigfun_train import LogEigenfunction, TrainState
 
-FIGDIR = Path(__file__).resolve().parents[2] / "notes" / "figures"
+FIGDIR = Path(__file__).resolve().parents[1] / "figures"
 FIGDIR.mkdir(parents=True, exist_ok=True)
 CKPT_DIR = Path(__file__).parent.parent / "checkpoints" / "eigfun"
 
@@ -174,7 +174,8 @@ def evaluate_lqr_catch(model, sigma=0.0):
     print(f"Raw un-gated control: reach upright {reach:.1f}% | hold {hold:.1f}% | "
           f"overshoot gap {reach-hold:.1f} pts", flush=True)
 
-    tex_path = Path(__file__).parent.parent.parent / "papers" / "eigenfunction" / "catch_rate.tex"
+    # the manuscript \input{}s this value; written beside the figures here
+    tex_path = FIGDIR / "catch_rate.tex"
     with open(tex_path, "w") as f:
         f.write(f"{rate:.1f}\\%")
     return rate

@@ -18,8 +18,17 @@ of the commands below.  Runtimes are wall-clock on a 2020-era 8-core laptop CPU.
 uv sync
 ```
 
-Figures are written to `notes/figures/`.  Scalars that the manuscript `\input`s
-(catch rate, the certified levels) are written next to the paper source.
+Run every command from the repository root: `plot_unmatched.py` imports
+`pendulum.unmatched_noise` as a package, which only resolves with the root on
+`sys.path`.
+
+Output goes to `figures/`, both the PDFs and the three small `.tex` files holding
+scalars the manuscript `\input`s (the catch rate and the two certified levels).
+
+`checkpoints/eigfun/cartpole_sigma1.0.eqx` is the trained cart-pole value network at
+the deployment noise level, included so that Fig. 2 and Table 1 reproduce in under
+three minutes on a laptop.  Retraining it from scratch (below) is not necessary to
+reproduce anything in the paper.
 
 ## Figures and tables
 
@@ -41,8 +50,8 @@ the step is `--dt 0.0025`.
 The constants quoted in Sections 8.1 and 8.2 come from
 
 ```bash
-uv run python pendulum/drift_condition.py      # c, C, b for the pendulum      (2 s)
-uv run python cartpole/drift_condition.py      # the same for the cart-pole    (5 s)
+uv run python pendulum/drift_condition.py      # c, C, b for the pendulum      (1 s)
+uv run python cartpole/drift_condition.py      # the same for the cart-pole   (34 s)
 ```
 
 ## Sum-of-squares certificates (Section 8.3) — MOSEK required
