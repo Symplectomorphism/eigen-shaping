@@ -24,11 +24,10 @@ The runtimes quoted below were measured on:
 
 `uv.lock` pins these exactly, so `uv sync` reproduces the environment.
 
-An RTX 3070 was present but unused: `pyproject.toml` installs `jax[cpu]`, so JAX
-reports the CPU backend and prints a notice to that effect.  Every runtime below is
-therefore a CPU figure.  Installing the `cuda` extra (`uv sync --extra cuda`) moves
-training to the GPU; the figure and table scripts are fast enough that it makes
-little difference to them.
+Every runtime below is a CPU figure: `pyproject.toml` installs `jax[cpu]`, so JAX
+reports the CPU backend and prints a notice to that effect.  Installing the `cuda`
+extra (`uv sync --extra cuda`) moves training to a GPU; the figure and table scripts
+are fast enough that it makes little difference to them.
 
 ## Requirements
 
