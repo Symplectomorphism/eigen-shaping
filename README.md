@@ -2,7 +2,33 @@
 
 Every figure, table and quoted constant in *Certified Energy Shaping of
 Port-Hamiltonian Systems via Linearly-Solvable Ergodic Control* is produced by one
-of the commands below.  Runtimes are wall-clock on a 2020-era 8-core laptop CPU.
+of the commands below.  Runtimes are wall-clock on the machine described under
+[Reference configuration](#reference-configuration); treat them as an order of
+magnitude, not a benchmark.
+
+## Reference configuration
+
+The runtimes quoted below were measured on:
+
+| | |
+| --- | --- |
+| CPU | Intel Core i5-13600K, 14 cores / 20 threads, 5.2 GHz boost |
+| Memory | 62 GiB |
+| OS | CachyOS, Linux 7.2.2 |
+| Python | 3.13.11 |
+| JAX | 0.10.1 / jaxlib 0.10.1, **CPU backend** |
+| equinox 0.13.8 | optax 0.2.8 |
+| numpy 2.4.6 | scipy 1.17.1 |
+| matplotlib 3.10.9 | sympy 1.14.0 |
+| cvxpy 1.9.1 | mosek 11.2.1 |
+
+`uv.lock` pins these exactly, so `uv sync` reproduces the environment.
+
+An RTX 3070 was present but unused: `pyproject.toml` installs `jax[cpu]`, so JAX
+reports the CPU backend and prints a notice to that effect.  Every runtime below is
+therefore a CPU figure.  Installing the `cuda` extra (`uv sync --extra cuda`) moves
+training to the GPU; the figure and table scripts are fast enough that it makes
+little difference to them.
 
 ## Requirements
 
